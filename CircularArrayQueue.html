@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>CircularArrayQueue.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: Monospaced}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: Monospaced}
+table {color: #888888; background-color: #313335; font-family: Monospaced}
+.ST1 {color: #808080; font-family: Monospaced; font-weight: bold}
+.ST3 {color: #8a653b}
+.whitespace {color: #505050}
+.comment {color: #808080}
+.ST4 {color: #ffc66d; font-family: Monospaced; font-style: italic}
+.ST5 {color: #9876aa; font-family: Monospaced; font-style: italic}
+.number {color: #6897bb}
+.string {color: #6a8759}
+.ST0 {color: #9876aa}
+.ST2 {color: #ffc66d}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/danielperez/Documents/Doing the BS for the CS/COP3337-Programming II/Final CheatSheet/src/CircularArrayQueue.java</td></tr></table>
+<pre>
+ 1 <span class="literal">import</span> java.util.NoSuchElementException;
+ 2 
+ 3 <span class="comment">/**</span>
+ 4    <span class="comment">An</span> <span class="comment">implementation</span> <span class="comment">of</span> <span class="comment">a</span> <span class="comment">queue</span> <span class="comment">as</span> <span class="comment">a</span> <span class="comment">circular</span> <span class="comment">array</span><span class="comment">.</span>
+ 5 <span class="comment">*/</span>
+ 6 <span class="literal">public</span> <span class="literal">class</span> CircularArrayQueue
+ 7 {
+ 8    <span class="literal">private</span> Object[] <span class="ST0">elements</span>;
+ 9    <span class="literal">private</span> <span class="literal">int</span> <span class="ST0">currentSize</span>;
+10    <span class="literal">private</span> <span class="literal">int</span> <span class="ST0">head</span>;
+11    <span class="literal">private</span> <span class="literal">int</span> <span class="ST0">tail</span>;
+12 
+13    <span class="comment">/**</span>
+14       <span class="comment">Constructs</span> <span class="comment">an</span> <span class="comment">empty</span> <span class="comment">queue</span><span class="comment">.</span>
+15    <span class="comment">*/</span>
+16    <span class="literal">public</span> CircularArrayQueue() 
+17    {
+18       <span class="literal">final</span> <span class="literal">int</span> INITIAL_SIZE = <span class="number">10</span>;
+19       <span class="ST0">elements</span> = <span class="literal">new</span> Object[INITIAL_SIZE];
+20       <span class="ST0">currentSize</span> = <span class="number">0</span>;
+21       <span class="ST0">head</span> = <span class="number">0</span>;
+22       <span class="ST0">tail</span> = <span class="number">0</span>;
+23    }
+24 
+25    <span class="comment">/**</span>
+26       <span class="comment">Checks</span> <span class="comment">whether</span> <span class="comment">this</span> <span class="comment">queue</span> <span class="comment">is</span> <span class="comment">empty</span><span class="comment">.</span>
+27       <span class="ST1">@return</span> <span class="comment">true</span> <span class="comment">if</span> <span class="comment">this</span> <span class="comment">queue</span> <span class="comment">is</span> <span class="comment">empty</span>
+28    <span class="comment">*/</span>
+29    <span class="literal">public</span> <span class="literal">boolean</span> <span class="ST2">empty</span>() { <span class="literal">return</span> <span class="ST0">currentSize</span> == <span class="number">0</span>; }
+30 
+31    <span class="comment">/**</span>
+32       <span class="comment">Adds</span> <span class="comment">an</span> <span class="comment">element</span> <span class="comment">to</span> <span class="comment">the</span> <span class="comment">tail</span> <span class="comment">of</span> <span class="comment">this</span> <span class="comment">queue</span><span class="comment">.</span>
+33       <span class="ST1">@param</span> <span class="ST3">newElement</span> <span class="comment">the</span> <span class="comment">element</span> <span class="comment">to</span> <span class="comment">add</span>
+34    <span class="comment">*/</span>
+35    <span class="literal">public</span> <span class="literal">void</span> <span class="ST2">add</span>(Object newElement)
+36    {
+37       growIfNecessary();
+38       <span class="ST0">currentSize</span>++;
+39       <span class="ST0">elements</span>[<span class="ST0">tail</span>] = newElement;
+40       <span class="ST0">tail</span> = (<span class="ST0">tail</span> + <span class="number">1</span>) % <span class="ST0">elements</span>.<span class="ST0">length</span>;
+41    }
+42 
+43    <span class="comment">/**</span>
+44       <span class="comment">Removes</span> <span class="comment">an</span> <span class="comment">element</span> <span class="comment">from</span> <span class="comment">the</span> <span class="comment">head</span> <span class="comment">of</span> <span class="comment">this</span> <span class="comment">queue</span><span class="comment">.</span>
+45       <span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">removed</span> <span class="comment">element</span>
+46    <span class="comment">*/</span>
+47    <span class="literal">public</span> Object <span class="ST2">remove</span>() 
+48    {
+49       <span class="literal">if</span> (<span class="ST0">currentSize</span> == <span class="number">0</span>) { <span class="literal">throw</span> <span class="literal">new</span> NoSuchElementException(); }
+50       Object removed = <span class="ST0">elements</span>[<span class="ST0">head</span>];
+51       <span class="ST0">head</span> = (<span class="ST0">head</span> + <span class="number">1</span>) % <span class="ST0">elements</span>.<span class="ST0">length</span>;
+52       <span class="ST0">currentSize</span>--;
+53       <span class="literal">return</span> removed;
+54    }
+55 
+56    <span class="comment">/**</span>
+57       <span class="comment">Grows</span> <span class="comment">the</span> <span class="comment">element</span> <span class="comment">array</span> <span class="comment">if</span> <span class="comment">the</span> <span class="comment">current</span> <span class="comment">size</span> <span class="comment">equals</span> <span class="comment">the</span> <span class="comment">capacity</span><span class="comment">.</span>
+58    <span class="comment">*/</span>
+59    <span class="literal">private</span> <span class="literal">void</span> <span class="ST2">growIfNecessary</span>()
+60    {
+61       <span class="literal">if</span> (<span class="ST0">currentSize</span> == <span class="ST0">elements</span>.<span class="ST0">length</span>)
+62       {
+63          Object[] newElements = <span class="literal">new</span> Object[<span class="number">2</span> * <span class="ST0">elements</span>.<span class="ST0">length</span>];
+64          <span class="literal">for</span> (<span class="literal">int</span> i = <span class="number">0</span>; i &lt; <span class="ST0">elements</span>.<span class="ST0">length</span>; i++) 
+65          { 
+66             newElements[i] = <span class="ST0">elements</span>[(<span class="ST0">head</span> + i) % <span class="ST0">elements</span>.<span class="ST0">length</span>]; 
+67          }      
+68          <span class="ST0">elements</span> = newElements;
+69          <span class="ST0">head</span> = <span class="number">0</span>;
+70          <span class="ST0">tail</span> = <span class="ST0">currentSize</span>;
+71       }
+72    }
+73 }
+74 
+75 <span class="literal">public</span> <span class="literal">class</span> QueueDemo
+76 {
+77    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST4">main</span>(String[] args)
+78    {
+79       CircularArrayQueue q = <span class="literal">new</span> CircularArrayQueue();
+80       q.add(<span class="string">&quot;</span><span class="string">Tom</span><span class="string">&quot;</span>);
+81       q.add(<span class="string">&quot;</span><span class="string">Diana</span><span class="string">&quot;</span>);
+82       q.add(<span class="string">&quot;</span><span class="string">Harry</span><span class="string">&quot;</span>);
+83       <span class="literal">while</span> (!q.empty())
+84       {
+85          System.<span class="ST5">out</span>.println(q.remove());
+86       }
+87    }
+88 }
+89 
+90 
+</pre></body>
+</html>

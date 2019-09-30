@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>LinkedListStack.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #a9b7c6; background-color: #2b2b2b; font-family: Monospaced}
+pre {color: #a9b7c6; background-color: #2b2b2b; font-family: Monospaced}
+table {color: #888888; background-color: #313335; font-family: Monospaced}
+.ST1 {color: #808080; font-family: Monospaced; font-weight: bold}
+.ST2 {color: #8a653b}
+.whitespace {color: #505050}
+.comment {color: #808080}
+.ST4 {color: #ffc66d; font-family: Monospaced; font-style: italic}
+.ST5 {color: #9876aa; font-family: Monospaced; font-style: italic}
+.string {color: #6a8759}
+.ST0 {color: #9876aa}
+.ST3 {color: #ffc66d}
+.literal {color: #cc7832}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">/Users/danielperez/Documents/Doing the BS for the CS/COP3337-Programming II/Final CheatSheet/src/LinkedListStack.java</td></tr></table>
+<pre>
+ 1 <span class="literal">import</span> java.util.NoSuchElementException;
+ 2 
+ 3 <span class="comment">/**</span>
+ 4    <span class="comment">An</span> <span class="comment">implementation</span> <span class="comment">of</span> <span class="comment">a</span> <span class="comment">stack</span> <span class="comment">as</span> <span class="comment">a</span> <span class="comment">sequence</span> <span class="comment">of</span> <span class="comment">nodes</span><span class="comment">.</span>
+ 5 <span class="comment">*/</span>
+ 6 <span class="literal">public</span> <span class="literal">class</span> LinkedListStack
+ 7 {
+ 8    <span class="literal">private</span> Node <span class="ST0">first</span>;
+ 9    
+10    <span class="comment">/**</span> 
+11       <span class="comment">Constructs</span> <span class="comment">an</span> <span class="comment">empty</span> <span class="comment">stack</span><span class="comment">.</span>
+12    <span class="comment">*/</span>
+13    <span class="literal">public</span> LinkedListStack()
+14    {  
+15       <span class="ST0">first</span> = <span class="literal">null</span>;
+16    }
+17 
+18    <span class="comment">/**</span>
+19       <span class="comment">Adds</span> <span class="comment">an</span> <span class="comment">element</span> <span class="comment">to</span> <span class="comment">the</span> <span class="comment">top</span> <span class="comment">of</span> <span class="comment">the</span> <span class="comment">stack</span><span class="comment">.</span>
+20       <span class="ST1">@param</span> <span class="ST2">element</span> <span class="comment">the</span> <span class="comment">element</span> <span class="comment">to</span> <span class="comment">add</span>
+21    <span class="comment">*/</span>
+22    <span class="literal">public</span> <span class="literal">void</span> <span class="ST3">push</span>(Object element)
+23    {  
+24       Node newNode = <span class="literal">new</span> Node();
+25       newNode.<span class="ST0">data</span> = element;
+26       newNode.<span class="ST0">next</span> = <span class="ST0">first</span>;
+27       <span class="ST0">first</span> = newNode;
+28    }
+29 
+30    <span class="comment">/**</span>
+31       <span class="comment">Removes</span> <span class="comment">the</span> <span class="comment">element</span> <span class="comment">from</span> <span class="comment">the</span> <span class="comment">top</span> <span class="comment">of</span> <span class="comment">the</span> <span class="comment">stack</span><span class="comment">.</span>
+32       <span class="ST1">@return</span> <span class="comment">the</span> <span class="comment">removed</span> <span class="comment">element</span>
+33    <span class="comment">*/</span>
+34    <span class="literal">public</span> Object <span class="ST3">pop</span>()
+35    {  
+36       <span class="literal">if</span> (<span class="ST0">first</span> == <span class="literal">null</span>) { <span class="literal">throw</span> <span class="literal">new</span> NoSuchElementException(); }
+37       Object element = <span class="ST0">first</span>.<span class="ST0">data</span>;
+38       <span class="ST0">first</span> = <span class="ST0">first</span>.<span class="ST0">next</span>;
+39       <span class="literal">return</span> element;
+40    }
+41 
+42    <span class="comment">/**</span>
+43       <span class="comment">Checks</span> <span class="comment">whether</span> <span class="comment">this</span> <span class="comment">stack</span> <span class="comment">is</span> <span class="comment">empty</span><span class="comment">.</span>
+44       <span class="ST1">@return</span> <span class="comment">true</span> <span class="comment">if</span> <span class="comment">the</span> <span class="comment">stack</span> <span class="comment">is</span> <span class="comment">empty</span>
+45    <span class="comment">*/</span>
+46    <span class="literal">public</span> <span class="literal">boolean</span> <span class="ST3">empty</span>()
+47    {
+48       <span class="literal">return</span> <span class="ST0">first</span> == <span class="literal">null</span>;
+49    }
+50    
+51    <span class="literal">class</span> Node
+52    {  
+53       <span class="literal">public</span> Object <span class="ST0">data</span>;
+54       <span class="literal">public</span> Node <span class="ST0">next</span>;
+55    }
+56 }
+57 
+58 <span class="literal">public</span> <span class="literal">class</span> StackDemo
+59 {
+60    <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST4">main</span>(String[] args)
+61    {
+62       LinkedListStack s = <span class="literal">new</span> LinkedListStack();
+63       s.push(<span class="string">&quot;</span><span class="string">Tom</span><span class="string">&quot;</span>);
+64       s.push(<span class="string">&quot;</span><span class="string">Diana</span><span class="string">&quot;</span>);
+65       s.push(<span class="string">&quot;</span><span class="string">Harry</span><span class="string">&quot;</span>);
+66       <span class="literal">while</span> (!s.empty())
+67       {
+68          System.<span class="ST5">out</span>.println(s.pop());
+69       }
+70    }
+71 }
+72 
+73 
+</pre></body>
+</html>
