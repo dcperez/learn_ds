@@ -18,6 +18,7 @@ public class Stack {
         if (!isFull()) {
             list[top] = c;
             top++;
+            System.out.println(c);
         }
             else {
             System.out.println("Stack is full! Expansion.");
@@ -31,6 +32,7 @@ public class Stack {
     public void pop() {
         if (!isEmpty()) {
             top--;
+            System.out.println(list[top]);
         }
         else { 
             System.out.println("Stack is already empty!");

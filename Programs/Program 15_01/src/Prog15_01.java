@@ -3,23 +3,20 @@ public class Prog15_01
 
     public static void main(String[] args)
     {
-        Stack s = new Stack();
+        Stack s = new Stack(10);
 
-        //insertion
-        for (int i = 0; i < 10; i++)
-        {
-            int x = 32 + (int) (Math.random() * 95);
-            System.out.println(x + " --> " + (char) x);
-            s.push((char) x);
-        }
-
-        //removal and display
-        for (int i = 0; i < 10; i++)
-        {
-            System.out.println("Item at the top: " + s.peek());
-
-            s.pop();
+      s.pop();
+      System.out.println("-----------------------");
+      s.push('a');
+      s.push('b');
+      s.push('c');
+      s.push('d');
+      System.out.println("-----------------------");
+      s.pop();
+      s.pop();
+      s.pop();
+        
          
-         }
+         
         }
     }
