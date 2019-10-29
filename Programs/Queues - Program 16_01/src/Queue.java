@@ -47,7 +47,7 @@ public class Queue
 
     public char getFront()
     {
-        if (count == 0){
+        if (!isEmpty()){
         return list[front];
         }
         else {

@@ -7,9 +7,9 @@ public class Prog15_03
     public Prog15_03() {
         Stack s = new Stack();
         for (int i = 1; i < 6;i++){
-            System.out.println(i);
+            //System.out.println(i);
             s.push((char) i);
-            print(s);
+            s.print(s);
         }
     }
     

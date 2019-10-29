@@ -11,7 +11,7 @@ public class Prog08_02 {
         //Fill the array with random numbers
         Random rnd = new Random();
 
-        for (int i = 0; i <= a.length; i++) {
+        for (int i = 0; i < a.length; i++) {
             a[i] = rnd.nextInt(100);
         }
 

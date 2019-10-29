@@ -76,8 +76,6 @@ public class LinkedList {
        Node newNode = new Node();
        newNode.setInfo(x);
        current.setNext(newNode);
-        
-      
     }
 
     public void remove(int x) {
