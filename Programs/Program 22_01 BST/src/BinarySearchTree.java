@@ -22,6 +22,17 @@ public class BinarySearchTree
         inorderDisplay(root.getLeftChild());
         System.out.println();
     }
+    
+    public void preorderDisplay()
+    {
+        preorderDisplay(root.getLeftChild());
+        System.out.println();
+    }
+    
+    public void postorderDisplay(){
+        postorderDisplay(root.getLeftChild());
+        System.out.println();
+    }
 
     public boolean contains(int x)
     {
@@ -43,6 +54,28 @@ public class BinarySearchTree
     {
         return getMin(root);
     }
+    
+    public String toString(){
+        
+        return toString(root.getLeftChild());
+        
+    }
+    
+    public int getHeight()
+    {
+        return getHeight(root.getLeftChild());
+                
+    }
+    
+    public int getCount()
+    {
+        return getCount(root.getLeftChild());
+    }
+    
+    public int getCount(int x)
+    {
+        return getCount(x,root.getLeftChild());
+    }
 
     private Node root;    //root of the bst; implemented as a dummy node.
 
@@ -54,6 +87,31 @@ public class BinarySearchTree
             System.out.print(p.getInfo() + " ");
             inorderDisplay(p.getRightChild());
         }
+    }
+    
+    private void preorderDisplay(Node p)
+    {
+        if (p !=null){
+            System.out.print(p.getInfo() + " ");
+            preorderDisplay(p.getLeftChild());
+            preorderDisplay(p.getRightChild());
+        }
+    }
+    
+    private void postorderDisplay(Node p){
+        if (p != null){
+            postorderDisplay(p.getLeftChild());
+            postorderDisplay(p.getRightChild());
+            System.out.print(p.getInfo() + " ");
+        }
+    }
+    
+    private String toString(Node p){
+        if (p != null)
+        {
+            return toString(p.getLeftChild()) + p.getInfo() + " " + toString(p.getRightChild());
+        }
+        else return "";
     }
 
     private boolean search(int x, Node p)
@@ -94,4 +152,34 @@ public class BinarySearchTree
         else
             return getMin(p.getLeftChild());
     }
+    
+    private int getHeight(Node p)
+    {
+        if (p == null)
+            return -1; //if counting nodes and not edges, use 0
+        else
+            return 1 + Math.max(getHeight(p.getLeftChild()), 
+                                getHeight(p.getRightChild()));
+    }
+    
+    private int getCount(Node p)
+    {
+        if (p == null)
+            return 0;
+        else 
+            return 1 + getCount(p.getLeftChild()) + getCount(p.getRightChild());
+    }
+    
+    private int getCount(int x, Node p)
+    {
+        if (p == null)
+            return 0;
+        else if (x == p.getInfo())
+            return 1 + getCount(x, p.getRightChild());
+        else if (x < p.getInfo())
+            return getCount(x, p.getLeftChild());
+        else
+            return getCount(x, p.getRightChild());
+    }
+    
 }
