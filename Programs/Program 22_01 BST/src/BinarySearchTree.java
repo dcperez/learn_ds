@@ -1,7 +1,4 @@
-/**
-* @author A. Hernandez
-* Data Structures and Algorithms
-*/
+
 public class BinarySearchTree
 {
     public BinarySearchTree()
@@ -76,6 +73,10 @@ public class BinarySearchTree
     {
         return getCount(x,root.getLeftChild());
     }
+    
+//    public void remove(int x){
+//        root.setLeftChild(remove(x, root.getLeftChild()));
+//    }
 
     private Node root;    //root of the bst; implemented as a dummy node.
 
@@ -109,7 +110,8 @@ public class BinarySearchTree
     private String toString(Node p){
         if (p != null)
         {
-            return toString(p.getLeftChild()) + p.getInfo() + " " + toString(p.getRightChild());
+            return toString(p.getLeftChild()) + p.getInfo() + 
+                    " " + toString(p.getRightChild());
         }
         else return "";
     }
@@ -167,7 +169,8 @@ public class BinarySearchTree
         if (p == null)
             return 0;
         else 
-            return 1 + getCount(p.getLeftChild()) + getCount(p.getRightChild());
+            return 1 + getCount(p.getLeftChild()) + 
+                                        getCount(p.getRightChild());
     }
     
     private int getCount(int x, Node p)
@@ -182,4 +185,27 @@ public class BinarySearchTree
             return getCount(x, p.getRightChild());
     }
     
+//    public Node remove(int x, Node p){
+//        
+//        if (p != null){
+//            if (x < p.getInfo())
+//                p.setLeftChild(remove(x, p.getLeftChild()));
+//            else
+//                if (x > p.getInfo())
+//                    p.setRightChild(remove(x, p.getRightChild()));
+//                else //x was found
+//                {
+//                    if (p.getLeftChild() != null && p.getRightChild() != null) //two children node{
+//                        int min = getMin(p.getRightChild());
+//                    p.getInfo(min);
+//                    p.setRightChild(remove(min,p.getRightChild()));
+//                }
+//            else //one child node
+//            p = p.getLeftChild() != null ?
+//                    p.getLeftChild() : p.getRightChild();
+//        }
+//        return p;
+//    }
+//    else return p;
+//    
 }
